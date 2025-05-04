@@ -5,6 +5,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import org.hibernate.annotations.ColumnDefault;
+import com.example.demo.enums.Language;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.EnumType;
+
 
 import java.time.LocalDate;
 
@@ -121,16 +125,28 @@ public class Movie {
         this.genre = genre;
     }
 
-/*
- TODO [Reverse Engineering] create field to map the 'language' column
- Available actions: Define target Java type | Uncomment as is | Remove column mapping
-    @Column(name = "language", columnDefinition = "language_enum not null")
-    private Object language;
-*/
-/*
- TODO [Reverse Engineering] create field to map the 'subtitle_language' column
- Available actions: Define target Java type | Uncomment as is | Remove column mapping
+    @Enumerated(EnumType.STRING)
+    @Column(name = "language", nullable = false, columnDefinition = "language_enum")
+    private Language language;
+
+    @Enumerated(EnumType.STRING)
     @Column(name = "subtitle_language", columnDefinition = "subtitle_enum")
-    private Object subtitleLanguage;
-*/
+    private Language subtitleLanguage;
+
+    public Language getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(Language language) {
+        this.language = language;
+    }
+
+    public Language getSubtitleLanguage() {
+        return subtitleLanguage;
+    }
+
+    public void setSubtitleLanguage(Language subtitleLanguage) {
+        this.subtitleLanguage = subtitleLanguage;
+    }
+
 }
