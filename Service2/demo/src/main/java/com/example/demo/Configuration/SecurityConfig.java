@@ -31,7 +31,7 @@ public class SecurityConfig {
         return http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/users/**", "/movies/**").permitAll() // Autorise toutes les méthodes HTTP
+                        .requestMatchers("/users/**", "/movies/**", "/session/**").permitAll() // Autorise toutes les méthodes HTTP
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
