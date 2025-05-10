@@ -25,4 +25,11 @@ public class MovieController {
     public void updateMovie(@PathVariable int id, @RequestBody Movie movie) {
         movieService.changeMovieById(id, movie);
     }
+
+    @PreAuthorize("permitAll()")
+    @DeleteMapping("/delete/{id}")
+    public void deleteMovie(@PathVariable int id) {
+        movieService.deleteMovieById(id);
+    }
+
 }
