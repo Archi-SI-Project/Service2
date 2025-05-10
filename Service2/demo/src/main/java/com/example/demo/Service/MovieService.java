@@ -19,11 +19,24 @@ public class MovieService {
 
     //Changer cette fonction pour qu'elle change tous les arguments
     public void changeMovieById(int id, Movie movie) {
-        Movie existingMovie = movieRepository.findById(id).orElseThrow(() -> new RuntimeException("Movie not found"));
+        Movie existingMovie = movieRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Movie not found"));
+
         existingMovie.setTitle(movie.getTitle());
         existingMovie.setGenre(movie.getGenre());
+        existingMovie.setDuration(movie.getDuration());
+        existingMovie.setCreationDate(movie.getCreationDate());
+        existingMovie.setDirector(movie.getDirector());
+        existingMovie.setImage(movie.getImage());
+        existingMovie.setMainActors(movie.getMainActors());
+        existingMovie.setSynopsis(movie.getSynopsis());
+        existingMovie.setMinAge(movie.getMinAge());
+        existingMovie.setLanguage(movie.getLanguage());
+        existingMovie.setSubtitleLanguage(movie.getSubtitleLanguage());
+
         movieRepository.save(existingMovie);
     }
+
 
     public void deleteMovieById(int id) {
         movieRepository.deleteById(id);
