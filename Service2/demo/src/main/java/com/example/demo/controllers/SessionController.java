@@ -13,7 +13,8 @@ public class SessionController {
     public SessionController(SessionService sessionService) {
         this.sessionService = sessionService;
     }
-    @PreAuthorize("isAuthenticated()")
+    @PreAuthorize("permitAll()")
+    //@PreAuthorize("isAuthenticated()")
     @PostMapping("/add")
     public void addSession(@RequestBody Session session) {
         sessionService.addSession(session);

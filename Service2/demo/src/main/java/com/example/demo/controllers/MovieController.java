@@ -15,18 +15,20 @@ public class MovieController {
         this.movieService = movieService;
 
     }
-    @PreAuthorize("isAuthenticated()")
+    @PreAuthorize("permitAll()")
+    //@PreAuthorize("isAuthenticated()")
     @PostMapping("/add")
     public void addMovie(@RequestBody Movie movie) {
         movieService.addMovie(movie);
     }
-    @PreAuthorize("isAuthenticated()")
+    @PreAuthorize("permitAll()")
+    //@PreAuthorize("isAuthenticated()")
     @PutMapping("/update/{id}")
     public void updateMovie(@PathVariable int id, @RequestBody Movie movie) {
         movieService.changeMovieById(id, movie);
     }
-
-    @PreAuthorize("isAuthenticated()")
+    @PreAuthorize("permitAll()")
+    //@PreAuthorize("isAuthenticated()")
     @DeleteMapping("/delete/{id}")
     public void deleteMovie(@PathVariable int id) {
         movieService.deleteMovieById(id);
