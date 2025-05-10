@@ -20,8 +20,8 @@ public class UserController {
     public User createUser(@RequestBody User user) {
         return userService.createUser(user);
     }
+    //@PreAuthorize("permitAll()")
     @GetMapping()
-    @PreAuthorize("permitAll()")
     public List<User> getAllUsers() {
         return userService.getAllUsers();
     }
