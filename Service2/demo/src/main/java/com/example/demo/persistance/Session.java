@@ -8,7 +8,7 @@ import org.hibernate.annotations.OnDeleteAction;
 import java.time.Instant;
 
 @Entity
-@Table(name = "session", schema = "public")
+@Table(name = "session_instance", schema = "public")
 public class Session {
     @Id
     @ColumnDefault("nextval('session_id_session_seq')")
