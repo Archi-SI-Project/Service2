@@ -11,6 +11,7 @@ import java.time.Instant;
 @Table(name = "session_instance", schema = "public")
 public class Session {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @ColumnDefault("nextval('session_id_session_seq')")
     @Column(name = "id_session", nullable = false)
     private Integer id;
