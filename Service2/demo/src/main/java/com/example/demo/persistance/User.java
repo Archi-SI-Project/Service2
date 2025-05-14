@@ -2,10 +2,16 @@ package com.example.demo.persistance;
 
 import jakarta.persistence.*;
 import org.hibernate.annotations.ColumnDefault;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.Collection;
+import java.util.Collections;
 
 @Entity
 @Table(name = "app_user")
-public class User {
+public class User implements UserDetails {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @ColumnDefault("nextval('app_user_id_seq')")
@@ -20,6 +26,16 @@ public class User {
 
     @Enumerated(EnumType.STRING)
     private Role role;
+
+    // Constructeur par défaut nécessaire pour JPA
+    public User() {
+    }
+
+    public User(String username, String password, Role role) {
+        this.username = username;
+        this.password = password;
+        this.role = role;
+    }
 
     public Integer getId() {
         return id;
@@ -45,10 +61,44 @@ public class User {
         this.password = password;
     }
 
-    public Role getRole() {return role; }
-    public void setRole(Role role) {this.role = role; }
-public enum Role {
-    ROLE_ADMIN,
-    ROLE_NORMAL
-}
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    public enum Role {
+        ROLE_ADMIN,
+        ROLE_NORMAL
+    }
+
+    // Implémentation des méthodes de UserDetails
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        // Convertir le rôle en un objet GrantedAuthority
+        return Collections.singletonList(() -> role.name());
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;  // l'account n'est pas expiré
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;  // l'account n'est pas verrouillé
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;  // les identifiants ne sont pas expirés
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;  // l'utilisateur est activé
+    }
 }
