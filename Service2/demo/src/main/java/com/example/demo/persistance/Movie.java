@@ -28,7 +28,7 @@ public class Movie {
     private String director;
 
     @Column(name = "image")
-    private byte[] image;
+    private String image;
 
     @Column(name = "main_actors", length = Integer.MAX_VALUE)
     private String mainActors;
@@ -88,11 +88,11 @@ public class Movie {
         this.director = director;
     }
 
-    public byte[] getImage() {
+    public String getImage() {
         return image;
     }
 
-    public void setImage(byte[] image) {
+    public void setImage(String image) {
         this.image = image;
     }
 
