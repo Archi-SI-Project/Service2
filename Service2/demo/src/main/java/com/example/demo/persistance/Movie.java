@@ -1,9 +1,7 @@
 package com.example.demo.persistance;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.example.demo.enums.LanguageEnum;
+import jakarta.persistence.*;
 import org.hibernate.annotations.ColumnDefault;
 
 import java.time.LocalDate;
@@ -13,6 +11,7 @@ import java.time.LocalDate;
 public class Movie {
     @Id
     @ColumnDefault("nextval('movie_id_movie_seq')")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_movie", nullable = false)
     private Integer id;
 
@@ -29,7 +28,7 @@ public class Movie {
     private String director;
 
     @Column(name = "image")
-    private byte[] image;
+    private String image;
 
     @Column(name = "main_actors", length = Integer.MAX_VALUE)
     private String mainActors;
@@ -38,8 +37,16 @@ public class Movie {
 
     @Column(name = "min_age")
     private Short minAge;
+
     @Column(name = "genre", length = 50)
     private String genre;
+    @Column(name = "language")
+    @Enumerated(EnumType.STRING)
+    private LanguageEnum.SubtitleEnum language;
+
+    @Column(name = "subtitle_language")
+    @Enumerated(EnumType.STRING)
+    private LanguageEnum.SubtitleEnum subtitleLanguage;
 
     public Integer getId() {
         return id;
@@ -81,11 +88,11 @@ public class Movie {
         this.director = director;
     }
 
-    public byte[] getImage() {
+    public String getImage() {
         return image;
     }
 
-    public void setImage(byte[] image) {
+    public void setImage(String image) {
         this.image = image;
     }
 
@@ -121,16 +128,17 @@ public class Movie {
         this.genre = genre;
     }
 
-/*
- TODO [Reverse Engineering] create field to map the 'language' column
- Available actions: Define target Java type | Uncomment as is | Remove column mapping
-    @Column(name = "language", columnDefinition = "language_enum not null")
-    private Object language;
-*/
-/*
- TODO [Reverse Engineering] create field to map the 'subtitle_language' column
- Available actions: Define target Java type | Uncomment as is | Remove column mapping
-    @Column(name = "subtitle_language", columnDefinition = "subtitle_enum")
-    private Object subtitleLanguage;
-*/
+    public LanguageEnum.SubtitleEnum getLanguage() {
+        return language;
+    }
+    public void setLanguage(LanguageEnum.SubtitleEnum language) {
+        this.language = language;
+    }
+    public LanguageEnum.SubtitleEnum getSubtitleLanguage() {
+        return subtitleLanguage;
+    }
+    public void setSubtitleLanguage(LanguageEnum.SubtitleEnum subtitleLanguage) {
+        this.subtitleLanguage = subtitleLanguage;
+    }
+
 }
