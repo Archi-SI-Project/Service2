@@ -17,12 +17,12 @@ public class UserController {
 
     //admin only
     @PostMapping
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     public User createUser(@RequestBody User user) {
         return userService.createUser(user);
     }
     //@PreAuthorize("permitAll()")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("isAuthenticated()")
     @GetMapping()
     public List<User> getAllUsers() {
         return userService.getAllUsers();
