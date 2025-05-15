@@ -18,8 +18,8 @@ public class MovieController {
     @PreAuthorize("permitAll()")
     //@PreAuthorize("isAuthenticated()")
     @PostMapping("/add")
-    public void addMovie(@RequestBody Movie movie) {
-        movieService.addMovie(movie);
+    public int addMovie(@RequestBody Movie movie) {
+        return movieService.addMovie(movie);
     }
     @PreAuthorize("permitAll()")
     //@PreAuthorize("isAuthenticated()")

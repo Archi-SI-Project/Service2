@@ -13,8 +13,9 @@ public class MovieService {
     }
 
 
-    public void addMovie(Movie movie) {
+    public int addMovie(Movie movie) {
         movieRepository.save(movie);
+        return movie.getId();
     }
 
     //Changer cette fonction pour qu'elle change tous les arguments
