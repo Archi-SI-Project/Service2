@@ -58,7 +58,8 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.addAllowedOrigin("http://localhost:5173");  // Spécifie l'URL autorisée pour CORS
+        configuration.addAllowedOrigin("http://localhost");  // Spécifie l'URL autorisée pour CORS
+        //configuration.addAllowedOriginPattern("localhost");
         configuration.addAllowedMethod("*");  // Permet toutes les méthodes HTTP
         configuration.addAllowedHeader("*");  // Permet tous les en-têtes
         configuration.setAllowCredentials(true);  // Autorise les cookies et autres informations d'authentification
